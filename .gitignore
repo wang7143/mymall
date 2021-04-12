@@ -1,0 +1,8 @@
+# Project exclude paths
+/mall_common/target/
+/mall_coupon/target/
+/mall_member/target/
+/mall_order/target/
+/mall_product/target/
+/mall_ware/target/
+/renren-generator/target/
