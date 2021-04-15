@@ -32,6 +32,12 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+    application:
+        name: renren_fast
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 172.25.95.135:3333
 
 
 ##多数据源的配置

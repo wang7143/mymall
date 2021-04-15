@@ -12,6 +12,7 @@
         <module name="mall_order" />
         <module name="mall_coupon" />
         <module name="mall_common" />
+        <module name="mall_gateway" />
         <module name="mall_product" />
         <module name="renren-fast" />
         <module name="mall_ware" />

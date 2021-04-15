@@ -7,9 +7,15 @@ server:
   port: 8080
   connection-timeout: 5000ms
   servlet:
-    context-path: /renren-fast
+    context-path: /renren_fast
 
 spring:
+  application:
+    name: renren_fast
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.25.95.135:3333
   # 环境 dev|test|prod
   profiles:
     active: dev
