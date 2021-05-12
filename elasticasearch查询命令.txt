@@ -1,0 +1,24 @@
+官方地址
+https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started.html#qs-search-data
+
+//按照时间段进行查询，查询过去一天的所有数据
+GET logs-my_app-default/_search
+{
+  "query": {
+    "range": {
+      "@timestamp": {
+        "gte": "now-1d/d",
+        "lt": "now/d"
+      }
+    }
+  },
+  "fields": [
+    "@timestamp"
+  ],
+  "_source": false,
+  "sort": [
+    {
+      "@timestamp": "desc"
+    }
+  ]
+}

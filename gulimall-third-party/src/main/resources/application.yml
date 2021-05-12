@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacosServer@:3333
+
+
+server:
+  port: 30000
+
