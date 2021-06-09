@@ -22,3 +22,12 @@ GET logs-my_app-default/_search
     }
   ]
 }
+
+SELECT
+DATE_FORMAT( date, "%Y-%m-%d" ) AS time,
+MIN(id) AS day_fast
+FROM test
+GROUP BY DATE_FORMAT( date, "%Y-%m-%d" );
+
+
+SELECT B.*,A.MATCH_DATE FROM B,A WHERE B.MATCH_ID = A.ID ORDER BY B.ID ASC;

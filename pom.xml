@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <nacosServer>172.24.206.221</nacosServer>
+        <nacosServer>192.168.8.99</nacosServer>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>

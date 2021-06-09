@@ -8,8 +8,11 @@ import com.atguigu.gulimall.product.service.CategoryService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.ByteArrayInputStream;
@@ -19,6 +22,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @SpringBootTest
@@ -32,6 +36,30 @@ public class ProDuctAppmainTest {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    StringRedisTemplate redisTemplate;
+
+    @Autowired
+    RedissonClient redissonClient;
+
+    @Test
+    public void RedisClient(){
+        System.out.println(redissonClient);
+
+    }
+
+    @Test
+    public void testredis() throws Exception {
+        ValueOperations<String, String> value = redisTemplate.opsForValue();
+
+        //保存
+        value.set("hello","world_" + UUID.randomUUID().toString());
+
+        //查询
+        String string = value.get("hello");
+        System.out.println(string);
+    }
 
     @Test
     public void test1(){

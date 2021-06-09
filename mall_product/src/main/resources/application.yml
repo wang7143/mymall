@@ -10,6 +10,18 @@ spring:
         server-addr: @nacosServer@:3333
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+  redis:
+    host: @nacosServer@
+#  cache:
+#    redis:
+#      time-to-live: 3600000
+#      key-prefix: CACHE_
+#      use-key-prefix: true
+#      cache-null-values: true
+
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -21,11 +33,11 @@ mybatis-plus:
 
 
 server:
-  port: 8091
+  port: 20031
 
 logging:
   level:
-    com.atguigu.gulimall: debug
+    com.atguigu.gulimall: error
 
 ribbon:
   ReadTimeout: 120000

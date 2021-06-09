@@ -2,12 +2,15 @@ package com.atguigu.gulimall.ware.service.impl;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.atguigu.common.utils.R;
+import com.atguigu.common.to.SkuHasStockVo;
 import com.atguigu.gulimall.ware.feign.ProductFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -74,6 +77,24 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             }
             wxSkuDao.insert(wareSkuEntity);
         }
+    }
+
+    @Override
+    public List<SkuHasStockVo> getSkusHasStock(List<Long> skuIds) {
+
+        List<SkuHasStockVo> vos = skuIds.stream().map(sku -> {
+            SkuHasStockVo vo = new SkuHasStockVo();
+            Long count = baseMapper.getSkuHasStock(sku);
+            if(count == null){
+
+            }
+            vo.setSkuId(sku);
+            vo.setHasStock(count>0);
+
+            return vo;
+        }).collect(Collectors.toList());
+
+        return vos;
     }
 
 }

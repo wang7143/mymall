@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
 public class SearchAppcontionTest {
@@ -79,5 +80,13 @@ public class SearchAppcontionTest {
         private String userName;
         private String gender;
         private Integer age;
+    }
+
+    @Test
+    public void a(){
+
+        String a = "海思";
+        byte[] bytes = a.getBytes(StandardCharsets.UTF_8);
+        System.out.println(bytes);
     }
 }

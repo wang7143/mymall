@@ -4,13 +4,13 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.24.206.221:3333
+        server-addr: 192.168.8.99:3333
     gateway:
       routes:
         - id: product_route
           uri: lb://mall-product
           predicates:
-            - Path=/api/product/**
+            - Path=/api/product/**,/test
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
@@ -49,11 +49,22 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
+        - id: mall_route
+          uri: lb://mall-product
+          predicates:
+            - Host=mall.com
+
+        - id: mall_search_route
+          uri: lb://mall-search
+          predicates:
+            - Host=search.mall.com
+
+
 
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://172.24.206.221:3306/mall_sms
+    url: jdbc:mysql://192.168.8.99:3306/mall_sms
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 

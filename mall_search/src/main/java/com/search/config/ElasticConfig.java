@@ -18,6 +18,8 @@ public class ElasticConfig {
         COMMON_OPTIONS = builder.build();
     }
 
+    @Value("nacos.addr")
+    private String addr;
 
 
     @Bean
@@ -27,3 +29,5 @@ public class ElasticConfig {
         return client;
     }
 }
+
+

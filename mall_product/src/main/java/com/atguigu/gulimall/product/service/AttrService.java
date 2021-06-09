@@ -1,9 +1,8 @@
 package com.atguigu.gulimall.product.service;
 
-import com.atguigu.gulimall.product.entity.ProductAttrValueEntity;
 import com.atguigu.gulimall.product.vo.AttrGroupRelationVo;
-import com.atguigu.gulimall.product.vo.AttrRespVo;
-import com.atguigu.gulimall.product.vo.AttrVo;
+import com.atguigu.common.vo.AttrRespVo;
+import com.atguigu.common.vo.AttrVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.gulimall.product.entity.AttrEntity;
@@ -42,6 +41,8 @@ public interface AttrService extends IService<AttrEntity> {
 
     PageUtils getNoRelation(Long attrgroupId, Map<String, Object> params);
 
+
+    List<Long> selectSearchAttr(List<Long> attrIds);
 
 
 }
