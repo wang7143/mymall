@@ -8,22 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mall_member" />
-        <module name="gulimall-third-party" />
-        <module name="untitled" />
+        <module name="mall-test-sso-client2" />
         <module name="mall_order" />
+        <module name="mall_auth_server" />
+        <module name="mall_product" />
+        <module name="mall-test-sso-server" />
+        <module name="renren-generator" />
+        <module name="mall_search" />
+        <module name="gulimall-third-party" />
+        <module name="mall-cart" />
         <module name="mall_coupon" />
         <module name="mall_common" />
         <module name="mall_gateway" />
-        <module name="mall_product" />
         <module name="renren-fast" />
         <module name="mall_ware" />
-        <module name="renren-generator" />
-        <module name="mall_search" />
+        <module name="mall-test-sso-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="mall-sso-server1" target="8" />
       <module name="renren-fast_1" target="1.8" />
       <module name="renren_fast" target="8" />
+      <module name="untitled" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

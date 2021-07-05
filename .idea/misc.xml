@@ -10,7 +10,9 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/mall-sso-server1/pom.xml" />
         <option value="$PROJECT_DIR$/renren_fast/pom.xml" />
+        <option value="$PROJECT_DIR$/untitled/pom.xml" />
       </set>
     </option>
   </component>

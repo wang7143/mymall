@@ -56,7 +56,7 @@
         prop="loginType"
         header-align="center"
         align="center"
-        label="登录类型[1-web，2-app]">
+        label="登录类型[1-com.atguigu.gulimall.order.web，2-app]">
       </el-table-column>
       <el-table-column
         fixed="right"

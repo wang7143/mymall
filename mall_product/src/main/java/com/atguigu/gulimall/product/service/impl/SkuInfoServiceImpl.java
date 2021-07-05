@@ -1,10 +1,22 @@
 package com.atguigu.gulimall.product.service.impl;
 
+import com.atguigu.gulimall.product.entity.SkuImagesEntity;
+import com.atguigu.gulimall.product.entity.SpuInfoDescEntity;
+import com.atguigu.gulimall.product.entity.SpuInfoEntity;
+import com.atguigu.gulimall.product.service.*;
+import com.atguigu.gulimall.product.vo.SkuItemSaleAttrVo;
+import com.atguigu.gulimall.product.vo.SkuItemVo;
+import com.atguigu.gulimall.product.vo.SpuItemAttrGroupVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,7 +25,6 @@ import com.atguigu.common.utils.Query;
 
 import com.atguigu.gulimall.product.dao.SkuInfoDao;
 import com.atguigu.gulimall.product.entity.SkuInfoEntity;
-import com.atguigu.gulimall.product.service.SkuInfoService;
 import org.springframework.util.StringUtils;
 
 
@@ -87,4 +98,59 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         return list;
     }
 
+    @Autowired
+    SkuImagesService imagesService;
+
+    @Autowired
+    SpuInfoDescService DescService;
+
+    @Autowired
+    AttrGroupService attrGroupService;
+
+    @Autowired
+    SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @Autowired
+    ThreadPoolExecutor threadPoolExecutor;
+
+    @Override
+    public SkuItemVo item(Long skuId) throws ExecutionException, InterruptedException {
+        SkuItemVo skuItemVo = new SkuItemVo();
+        CompletableFuture<SkuInfoEntity> infoFuture = CompletableFuture.supplyAsync(()->{
+            //1.sku基本信息 pms_sku_info
+            SkuInfoEntity info = getById(skuId);
+            skuItemVo.setInfo(info);
+            return info;
+        },threadPoolExecutor);
+
+        CompletableFuture<Void> saleAttrFuture = infoFuture.thenAcceptAsync((res) -> {
+            //3.获取spu销售属性组合
+            List<SkuItemSaleAttrVo> SaleAtt = skuSaleAttrValueService.getSaleAttrsBySpuId(res.getSpuId());
+            skuItemVo.setSaleAttr(SaleAtt);
+        }, threadPoolExecutor);
+
+        CompletableFuture<Void> descFuture = infoFuture.thenAcceptAsync((res) -> {
+            //4.获取spu的介绍
+            SpuInfoDescEntity desc = DescService.getById(res.getSpuId());
+            skuItemVo.setDesp(desc);
+        }, threadPoolExecutor);
+
+        CompletableFuture<Void> baseAttrFuture = infoFuture.thenAcceptAsync((res) -> {
+            //5.获取spu规格参数信息
+            List<SpuItemAttrGroupVo> attr = attrGroupService.getAttrById(res.getSpuId(), res.getCatalogId());
+            skuItemVo.setGroupAttrs(attr);
+        }, threadPoolExecutor);
+
+        //2.sku 图片信息 pms_sku_images
+        CompletableFuture<Void> imageFuture = CompletableFuture.runAsync(() -> {
+            List<SkuImagesEntity> images = imagesService.getImagesBySkuID(skuId);
+            skuItemVo.setImages(images);
+        }, threadPoolExecutor);
+
+        //等待所有任务都完成
+        CompletableFuture.allOf(saleAttrFuture,descFuture,baseAttrFuture,imageFuture).get();
+        return skuItemVo;
+    }
+  //华为 HUAWEI P40 Pro+ 麒麟990 5G  流光幻镜 套餐二 麒麟990 5G SoC芯片 5000万超感知徕卡五摄 100倍双目变焦 全网通5G
+    //华为 HUAWEI P40 Pro+ 麒麟990 5G  流光幻镜 套餐一 麒麟990 5G SoC芯片 5000万超感知徕卡五摄 100倍双目变焦 全网通5G
 }

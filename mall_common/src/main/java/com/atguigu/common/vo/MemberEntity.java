@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.member.entity;
+package com.atguigu.common.vo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 会员
@@ -14,6 +15,7 @@ import lombok.Data;
  * @email sunlightcs@gmail.com
  * @date 2021-04-12 13:53:13
  */
+@ToString
 @Data
 @TableName("ums_member")
 public class MemberEntity implements Serializable {
@@ -103,6 +105,6 @@ public class MemberEntity implements Serializable {
 	/**
 	 * 社交账号Token过期时间
 	 */
-	private String expiresIn;
+	private Long expiresIn;
 
 }

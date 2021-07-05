@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>untitled</module>
         <module>renren-fast</module>
         <module>renren-generator</module>
         <module>mall_product</module>
@@ -21,10 +20,15 @@
         <module>mall_gateway</module>
         <module>gulimall-third-party</module>
         <module>mall_search</module>
+        <module>mall_auth_server</module>
+        <module>mall-test-sso-server</module>
+        <module>mall-test-sso-client</module>
+        <module>mall-test-sso-client2</module>
+        <module>mall-cart</module>
     </modules>
 
     <properties>
-        <nacosServer>192.168.8.99</nacosServer>
+        <nacosServer>172.19.234.247</nacosServer>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>

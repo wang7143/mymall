@@ -4,16 +4,16 @@
 //import com.atguigu.common.utils.R;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.MethodArgumentNotValidException;
-//import org.springframework.web.bind.annotation.ControllerAdvice;
-//import org.springframework.web.bind.annotation.ExceptionHandler;
-//import org.springframework.web.bind.annotation.RestControllerAdvice;
+//import org.springframework.com.atguigu.gulimall.order.web.bind.MethodArgumentNotValidException;
+//import org.springframework.com.atguigu.gulimall.order.web.bind.annotation.ControllerAdvice;
+//import org.springframework.com.atguigu.gulimall.order.web.bind.annotation.ExceptionHandler;
+//import org.springframework.com.atguigu.gulimall.order.web.bind.annotation.RestControllerAdvice;
 //
 //import java.util.HashMap;
 //import java.util.Map;
 //
 //@Slf4j
-//@RestControllerAdvice(basePackages = "com.atguigu.gulimall.ware.controller")
+//@RestControllerAdvice(basePackages = "com.atguigu.gulimall.ware.sso.client.controller")
 //public class gulimallException {
 //
 //    @ExceptionHandler(value = MethodArgumentNotValidException.class)

@@ -1,4 +1,4 @@
-//package com.atguigu.gulimall.product.controller;
+//package com.atguigu.gulimall.product.sso.client.controller;
 //
 //import java.io.BufferedReader;
 //import java.io.ByteArrayInputStream;

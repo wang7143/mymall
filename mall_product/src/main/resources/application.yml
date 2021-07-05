@@ -13,7 +13,7 @@ spring:
   thymeleaf:
     cache: false
   redis:
-    host: @nacosServer@
+    host: 127.0.0.1
 #  cache:
 #    redis:
 #      time-to-live: 3600000

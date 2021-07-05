@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.8.99:3333
+        server-addr: 172.19.234.247:3333
     gateway:
       routes:
         - id: product_route
@@ -52,19 +52,36 @@ spring:
         - id: mall_route
           uri: lb://mall-product
           predicates:
-            - Host=mall.com
+            - Host=mall.com,item.mall.com
 
         - id: mall_search_route
           uri: lb://mall-search
           predicates:
             - Host=search.mall.com
 
+        - id: mall_auth_route
+          uri: lb://mall-auth
+          predicates:
+            - Host=auth.mall.com
+
+        - id: mall_auth_route
+          uri: lb://mall-cart
+          predicates:
+            - Host=cart.mall.com
+
+        - id: mall_order_route
+          uri: lb://mall-order
+          predicates:
+            - Host=order.mall.com
+
+
+
 
 
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.8.99:3306/mall_sms
+    url: jdbc:mysql://172.19.234.247:3306/mall_sms
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
