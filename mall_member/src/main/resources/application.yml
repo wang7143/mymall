@@ -8,6 +8,9 @@ spring:
     nacos:
       discovery:
         server-addr: @nacosServer@:3333
+    alibaba:
+      seata:
+        tx-service-group: fsp_tx_group
   application:
     name: mall-member
 

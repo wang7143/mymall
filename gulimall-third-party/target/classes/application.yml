@@ -2,7 +2,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.31.37.252:3333
+        server-addr: 172.18.42.87:3333
 
 
 server:

@@ -8,6 +8,9 @@ spring:
     nacos:
       discovery:
         server-addr: @nacosServer@:3333
+    alibaba:
+      seata:
+        tx-service-group: fsp_tx_group
   rabbitmq:
     publisher-confirms: true
     publisher-returns: true
@@ -25,3 +28,8 @@ mybatis-plus:
 
 server:
   port: 20030
+
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

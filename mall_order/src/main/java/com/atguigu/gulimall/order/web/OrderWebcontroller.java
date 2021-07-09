@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.ExecutionException;
@@ -30,12 +31,20 @@ public class OrderWebcontroller {
 
     //提交下单
     @PostMapping("/submitOrder")
-    public String submitOrder(OrderSubmitVo vo){
+    public String submitOrder(OrderSubmitVo vo, Model model, RedirectAttributes redirectAttributes){
         SubmitOrderResponseVo responseVo = orderService.submitOrder(vo);
         //前去创建订单，
         if(responseVo.getCode() == 0){
+            model.addAttribute("submitOrderResp",responseVo);
             return "pay";
         }else{
+            String msg = "";
+            switch (responseVo.getCode()){
+                case 1: msg = "订单信息过期";break;
+                case 2: msg = "订单价格发生变化";break;
+                case 3: msg = "库存锁定失败，库存不足";break;
+            }
+            redirectAttributes.addFlashAttribute("msg",msg);
             return "redirect:http://order.mall.com/toTrade";
         }
     }
