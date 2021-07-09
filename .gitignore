@@ -8,3 +8,5 @@
 /renren-generator/target/
 /mall_product/src/main/resources/
 /gulimall-third-party/
+/**/target/
+/.idea/
