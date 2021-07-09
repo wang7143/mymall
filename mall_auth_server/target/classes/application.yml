@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://172.18.42.87:3306/mall_oms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.18.42.87:3333
+
+
+server:
+  port: 20035
+
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
