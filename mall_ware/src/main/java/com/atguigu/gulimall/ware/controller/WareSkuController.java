@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.atguigu.common.to.SkuHasStockVo;
+import com.atguigu.gulimall.ware.Vo.LockStockResult;
+import com.atguigu.gulimall.ware.Vo.WareSkuLockVo;
+import com.atguigu.gulimall.ware.exception.NoStock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +30,17 @@ import com.atguigu.common.utils.R;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    @PostMapping("/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVo vo){
+        try {
+            Boolean result = wareSkuService.orderLockStock(vo);
+            return R.ok();
+        }catch (NoStock e){
+            return R.error(10023,"没有库存");
+        }
+
+    }
 
     @PostMapping("/hasstock")
     public R getSkuHasStock(@RequestBody List<Long> skuIds){

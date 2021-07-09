@@ -3,7 +3,11 @@ package com.atguigu.gulimall.ware.service.impl;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.atguigu.common.utils.R;
 import com.atguigu.common.to.SkuHasStockVo;
+import com.atguigu.gulimall.ware.Vo.OrderItemVo;
+import com.atguigu.gulimall.ware.Vo.WareSkuLockVo;
+import com.atguigu.gulimall.ware.exception.NoStock;
 import com.atguigu.gulimall.ware.feign.ProductFeignService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +99,61 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
         }).collect(Collectors.toList());
 
         return vos;
+    }
+
+
+    //运行时异常都会回滚
+    @Transactional(rollbackFor = NoStock.class)
+    @Override
+    public boolean orderLockStock(WareSkuLockVo vo) {
+
+        //1.找到每个商品库存在哪
+        List<OrderItemVo> locks = vo.getLocks();
+        List<SkuWareHasStock> collect = locks.stream().map(item -> {
+            SkuWareHasStock hasStock = new SkuWareHasStock();
+            Long skuId = item.getSkuId();
+            hasStock.setSkuId(skuId);
+            List<Long> wareId = wxSkuDao.ListWareIdJasStock(skuId);
+            hasStock.setWareId(wareId);
+            hasStock.setNum(item.getCount());
+            return hasStock;
+        }).collect(Collectors.toList());
+
+        Boolean allLock = true;
+
+        for (SkuWareHasStock hasStock : collect){
+            Boolean skuStocked = false;
+            Long skuId = hasStock.getSkuId();
+            List<Long> wareId = hasStock.getWareId();
+            if(wareId == null || wareId.size() == 0){
+                //没有库存
+                throw new NoStock(skuId);
+            }
+            for (Long ware : wareId){
+                Long count = wxSkuDao.lockSkuStock(skuId,ware,hasStock.getNum());
+                if(count == 1){
+                    //当前仓库锁成功
+                    skuStocked = true;
+                    break;
+                }else{
+
+                }
+            }
+
+            if(skuStocked == false){
+                throw new NoStock(skuId);
+            }
+        }
+
+        // 3. 成功
+        return true;
+    }
+
+    @Data
+    class SkuWareHasStock{
+        private Long skuId;
+        private Integer num;
+        private List<Long> wareId;
     }
 
 }
