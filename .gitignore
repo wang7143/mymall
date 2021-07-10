@@ -9,4 +9,6 @@
 /mall_product/src/main/resources/
 /gulimall-third-party/target/
 /**/target/
-/.idea/
+/mall-test-sso-client/target/
+/mall-test-sso-client2/target/
+/mall-test-sso-server/target/
