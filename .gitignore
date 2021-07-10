@@ -7,6 +7,6 @@
 /mall_ware/target/
 /renren-generator/target/
 /mall_product/src/main/resources/
-/gulimall-third-party/**
+/gulimall-third-party/target/
 /**/target/
 /.idea/
