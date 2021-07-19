@@ -18,6 +18,9 @@
     <update id="lockSkuStock">
         update `wms_ware_sku` set stock_locked = stock_locked+1 where sku_id=#{skuId} and ware_id=#{ware} and stock-stock_locked>=#{num}
     </update>
+    <update id="unLockStock">
+        update wms_ware_sku set stock_locked=stock_locked+#{skuNum} where sku_id=#{skuId} and ware_id=#{wareId} and stock-stock_locked>=#{skuNum}
+    </update>
     <select id="getSkuHasStock" resultType="java.lang.Long">
         Select SUM(stock-stock_locked) FROM `wms_ware_sku` WHERE sku_id=#{sku}
     </select>

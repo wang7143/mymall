@@ -30,7 +30,7 @@ public class StockReleaseListener {
         System.out.println("收到解锁库存的消息");
 
         try {
-//            wareSkuService.unlockStock(to);
+            wareSkuService.unlockStock(to);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
         } catch (Exception e){
             //拒接 重新放回消息队列
