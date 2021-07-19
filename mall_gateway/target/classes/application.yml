@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.18.42.87:3333
+        server-addr: 172.30.67.154:3333
     gateway:
       routes:
         - id: product_route
@@ -81,7 +81,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://172.18.42.87:3306/mall_sms
+    url: jdbc:mysql://172.30.67.154:3306/mall_sms
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
