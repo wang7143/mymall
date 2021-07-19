@@ -22,3 +22,13 @@ mybatis-plus:
 
 server:
   port: 20080
+
+
+seata:
+  tx-service-group: fsp_tx_group
+  enabled: true
+  registry:
+    type: nacos
+    nacos:
+      server-addr: @nacosServer@:3333
+      group: DEFAULT_GROUP
